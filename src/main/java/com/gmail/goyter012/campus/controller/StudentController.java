@@ -21,7 +21,7 @@ public class StudentController {
     }
 
     @GetMapping("/")
-    public String start(){
+    public String start() {
         return "index";
     }
 
@@ -31,10 +31,6 @@ public class StudentController {
         model.addAttribute("students", studentService.allStudents());
         return "stud/students";
     }
-
-
-
-
 
 
 }

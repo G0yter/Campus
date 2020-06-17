@@ -2,5 +2,5 @@
 
 
 <@c.page>
-        STUDENTS PAGE WILL BE HERE HERE
+    STUDENTS PAGE WILL BE HERE HERE
 </@c.page>

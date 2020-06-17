@@ -2,5 +2,5 @@
 
 
 <@c.page>
-    <div><a href="/main">Start </div>
+    <div><a href="/main">Start</div>
 </@c.page>
