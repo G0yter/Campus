@@ -1,6 +1,8 @@
 <#import "../parts/common.ftl" as c>
+<#import "../parts/login.ftl" as l>
 
 
 <@c.page>
-    STUDENTS PAGE WILL BE HERE HERE
+    <div> <@l.logout /></div>
+    STUDENTS CARDS WILL BE HERE
 </@c.page>
