@@ -29,6 +29,11 @@ public class StudentService {
         studentRepo.save(student);
     }
 
+    public List<Student> getAllStudents() {
+        return (List<Student>) studentRepo.findAll();
+    }
+
+
     public void delete(Student student) {
         studentRepo.delete(student);
     }
