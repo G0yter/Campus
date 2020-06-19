@@ -5,20 +5,29 @@ import com.gmail.goyter012.campus.service.FacultyService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
+import java.util.UUID;
 
 
 @Controller
 @RequiredArgsConstructor
 @Slf4j
 public class FacultyController {
+
+
+    @Value("${upload.path}")
+    private String uploadPath;
 
     private FacultyService facultyService;
 
@@ -61,8 +70,9 @@ public class FacultyController {
     @PostMapping("/faculties")
     public String addFaculty(@RequestParam String fNum,
                              @RequestParam String phone,
-                             @RequestParam String dName, Model model) {
-        return saveOrEdit(null, fNum, phone, dName, model, "save");
+                             @RequestParam String dName, Model model,
+                             @RequestParam("facultyFile") MultipartFile file) throws IOException {
+        return saveOrEdit(file, null, fNum, phone, dName, model, "save");
     }
 
 
@@ -78,15 +88,17 @@ public class FacultyController {
     public String editFaculty(@RequestParam Long id,
                               @RequestParam String fNum,
                               @RequestParam String phone,
-                              @RequestParam String dName, Model model) {
-        return saveOrEdit(id, fNum, phone, dName, model, "edit");
+                              @RequestParam String dName, Model model,
+                              @RequestParam("editFacultyFile") MultipartFile file) throws IOException {
+        return saveOrEdit(file, id, fNum, phone, dName, model, "edit");
     }
 
 
-    private String saveOrEdit(@RequestParam Long id,
+    private String saveOrEdit(MultipartFile file,
+                              @RequestParam Long id,
                               @RequestParam String fNum,
                               @RequestParam String phone,
-                              @RequestParam String dName, Model model, String choice) {
+                              @RequestParam String dName, Model model, String choice) throws IOException {
 
         Faculty faculty = new Faculty();
 
@@ -97,6 +109,25 @@ public class FacultyController {
         if (fNum.equals("") || phone.equals("") || dName.equals("")) {
             return "errors/errorInput";
         }
+
+        if(file != null && !file.getOriginalFilename().isEmpty()){
+
+            File uploadDir = new File(uploadPath);
+
+            if(!uploadDir.exists()){
+                uploadDir.mkdirs();
+            }
+
+            String uuidFile = UUID.randomUUID().toString();
+            String resultFilename = uuidFile + "." + file.getOriginalFilename();
+
+            file.transferTo(new File(uploadPath + "/" + resultFilename));
+
+            faculty.setFilename(resultFilename);
+
+        }
+
+
 
         facultyService.saveFaculty(faculty);
         List<Faculty> faculties = facultyService.allFaculties();
