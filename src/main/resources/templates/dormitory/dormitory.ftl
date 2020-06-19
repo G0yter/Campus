@@ -1,22 +1,28 @@
 <#import "../parts/common.ftl" as c>
 <#import "../parts/login.ftl" as l>
+<#include "../parts/security.ftl">
 
 
 
 
 <@c.page>
 
-    <@l.logout />
-    <a class="btn btn-primary" data-toggle="collapse" href="#messAdding" role="button" aria-expanded="false" aria-controls="collapseExample">
+    <a class="btn btn-primary mt-2" data-toggle="collapse" href="#messAdding" role="button" aria-expanded="false"
+       aria-controls="collapseExample">
         Add Dormitory
     </a>
     <div class="collapse" id="messAdding">
         <div class="form-group mt-3">
             <form method="post" enctype="multipart/form-data">
                 <input type="hidden" name="_csrf" value="${_csrf.token}"/>
-
                 <div class="form-group">
-                    <input type="text" class="form-control" name="dNum" placeholder="Dorm number" />
+                    <div class="custom-file">
+                        <input type="file" name="dormitoryFile" id="dormFile">
+                        <label class="custom-file-label" for="dormFile">Choose file</label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <input type="text" class="form-control" name="dNum" placeholder="Dorm number"/>
                 </div>
                 <div class="form-group">
                     <input type="text" class="form-control" name="dAddr" placeholder="Dormitory address">
@@ -52,27 +58,35 @@
 
 
 
-    <div class="card-columns" >
+    <div class="card-columns">
         <#list dormitories as d>
-            <div class="card my-3" style="width: 18rem;">
+            <div class="card text-center"
+                 style="background-color: rgba(0,0,0,0.5) !important; height: auto; width: 21rem;">
+                <#if d.filename??>
+                    <img src="/img/${d.filename}" class="card-img-top" alt="No image yet">
+                </#if>
                 <div class="card-body">
 
                     <div class="card-title">
-                        <h1 style="color:#0000ff">${d.dormNumber}</h1>
+                        <h1 style="color:#00ffff">${d.dormNumber}</h1>
                     </div>
 
                     <div class="m-2">
-                        <span><p style="color: #00ffff"> Address:  </p> ${d.address}</span>
+                        <span><p style="color: #00ffff"> Address:  </p> <p
+                                    style="color: whitesmoke">${d.address}</p> </span>
                     </div>
                     <div class="m-2">
-                        <span><p style="color: #00ffff"> Phone: </p> ${d.phone}</span>
+                        <span><p style="color: #00ffff"> Phone: </p> <p style="color: whitesmoke">${d.phone}</p> </span>
                     </div>
                     <div class="m-2">
-                        <span><p style="color: #00ffff"> Controller name: </p> ${d.commFullName}</span>
+                        <span><p style="color: #00ffff"> Controller name: </p> <p
+                                    style="color: whitesmoke">${d.commFullName}</p> </span>
                     </div>
 
+                    <#if isAdmin>
                     <a href="/editDormitory/${d.getId()}" class="card-link">Edit</a>
-                    <a href="/delDormitory/${d.getId()}"  class="card-link">Delete</a>
+                    <a href="/delDormitory/${d.getId()}" class="card-link">Delete</a>
+                    </#if>
 
                 </div>
             </div>
