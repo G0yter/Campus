@@ -24,6 +24,8 @@ public class Faculty {
     @Column(name = "dec_full_name")
     private String decanName;
 
+    private String filename;
+
     @OneToMany(mappedBy = "faculty", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Group> groups = new ArrayList<>();
 
