@@ -49,6 +49,12 @@ public class GroupController {
         return "group/group";
     }
 
+    @GetMapping("/getAllGroups")
+    public String getAllGroups(Model model) {
+        model.addAttribute("groups", groupService.getAllGroups());
+        return "group/group"st;
+    }
+
 
     @GetMapping("/delGroup/{id}")
     public String StudDelForm(@PathVariable Long id, Model model) {
@@ -71,7 +77,7 @@ public class GroupController {
     public String addGroup(@RequestParam String cipher,
                            @RequestParam String facName, Model model,
                            @RequestParam("groupFile") MultipartFile file) throws IOException {
-        return saveOrEdit(file,null, cipher, facName, model, "save");
+        return saveOrEdit(file, null, cipher, facName, model, "save");
     }
 
 
@@ -124,11 +130,11 @@ public class GroupController {
             return "errors/facultyNotInList";
         }
 
-        if(file != null && !file.getOriginalFilename().isEmpty()){
+        if (file != null && !file.getOriginalFilename().isEmpty()) {
 
             File uploadDir = new File(uploadPath);
 
-            if(!uploadDir.exists()){
+            if (!uploadDir.exists()) {
                 uploadDir.mkdirs();
             }
 
