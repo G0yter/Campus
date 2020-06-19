@@ -1,24 +1,31 @@
 <#import "../parts/common.ftl" as c>
 <#import "../parts/login.ftl" as l>
+<#include "../parts/security.ftl">
 
 
 <@c.page>
 
-    <@l.logout />
 
-    <a class="btn btn-primary" data-toggle="collapse" href="#messAdding" role="button" aria-expanded="false" aria-controls="collapseExample">
+    <a class="btn btn-primary mt-2" data-toggle="collapse" href="#messAdding" role="button" aria-expanded="false"
+       aria-controls="collapseExample">
         Add Faculty
     </a>
     <div class="collapse" id="messAdding">
         <div class="form-group mt-3">
             <form method="post" enctype="multipart/form-data">
                 <input type="hidden" name="_csrf" value="${_csrf.token}"/>
+                <div class="form-group">
+                    <div class="custom-file">
+                        <input type="file" name="facultyFile" id="facFile">
+                        <label class="custom-file-label" for="facFile">Choose file</label>
+                    </div>
+                </div>
 
                 <div class="form-group">
-                    <input type="text" class="form-control" name="fNum" placeholder="Faculty name" />
+                    <input type="text" class="form-control" name="fNum" placeholder="Faculty name"/>
                 </div>
                 <div class="form-group">
-                    <input type="text" class="form-control" name="phone" placeholder="Phone" >
+                    <input type="text" class="form-control" name="phone" placeholder="Phone">
                 </div>
                 <div class="form-group">
                     <input type="text" class="form-control" name="dName" placeholder="Dean name">
@@ -46,25 +53,32 @@
     </div>
 
 
-    <div class="card-columns" >
+    <div class="card-columns">
         <#list faculties as f>
-            <div class="card my-3" style="width: 18rem;">
+            <div class="card text-center"
+                 style="background-color: rgba(0,0,0,0.5) !important; height: auto; width: 21rem;">
+                <#if f.filename??>
+                    <img src="/img/${f.filename}" class="card-img-top" alt="No image yet">
+                </#if>
                 <div class="card-body">
 
                     <div class="card-title">
-                        <h1 style="color:#0000ff">${f.name}</h1>
+                        <h1 style="color:#00ffff">${f.name}</h1>
                     </div>
 
                     <div class="m-2">
-                        <span><p style="color: #00ffff"> Phone:  </p> ${f.phone}</span>
+                        <span><p style="color: #00ffff"> Phone:  </p> <p
+                                    style="color: whitesmoke;"> ${f.phone} </p></span>
                     </div>
                     <div class="m-2">
-                        <span><p style="color: #00ffff"> Dean name : </p> ${f.decanName}</span>
+                        <span><p style="color: #00ffff"> Dean name : </p> <p
+                                    style="color: whitesmoke">${f.decanName}</p></span>
                     </div>
 
-                    <a href="/editFaculty/${f.getId()}" class="card-link">Edit</a>
-                    <a href="/delFaculty/${f.getId()}"  class="card-link">Delete</a>
-
+                    <#if isAdmin>
+                        <a href="/editFaculty/${f.getId()}" class="card-link">Edit</a>
+                        <a href="/delFaculty/${f.getId()}" class="card-link">Delete</a>
+                    </#if>
 
                 </div>
             </div>
