@@ -12,6 +12,13 @@
                 <input type="hidden" name="_csrf" value="${_csrf.token}"/>
 
                 <div class="form-group">
+                    <div class="custom-file">
+                        <input type="file" name="editFacultyFile" id="editFacFile">
+                        <label class="custom-file-label" for="editFacFile">Choose file</label>
+                    </div>
+                </div>
+
+                <div class="form-group">
                     <input type="text" class="form-control" name="fNum" placeholder="Faculty name" value="${faculty.name}"/>
                 </div>
                 <div class="form-group">
@@ -39,6 +46,6 @@
 
     <a href="/faculties" class="card-link">Back</a>
 
-    <h5>You delete every Student and Group by updating his faculty! Be careful</h5>
+    <h5 style="color: whitesmoke">You delete every Student and Group by updating his faculty! Be careful</h5>
 
 </@c.page>
