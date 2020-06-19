@@ -52,7 +52,7 @@ public class GroupController {
     @GetMapping("/getAllGroups")
     public String getAllGroups(Model model) {
         model.addAttribute("groups", groupService.getAllGroups());
-        return "group/group"st;
+        return "group/group";
     }
 
 

@@ -40,10 +40,20 @@
 
     <div class="form-row">
         <div class="form-group col-md-6">
-            <form method="get" action="filterGroups" class="form-inline">
-                <input type="text" name="filterGroups" class="form-control" placeholder="Search...">
-                <button type="submit" class="btn btn-primary ml-2">Search</button>
-            </form>
+            <div>
+                <form method="get" action="filterGroups" class="form-inline">
+                    <input type="text" name="filterGroups" class="form-control" placeholder="Search...">
+                    <button type="submit" class="btn btn-primary ml-2">Search</button>
+                </form>
+            </div>
+
+            <div>
+                <form method="get" action="/getAllGroups" class="form-inline">
+                    <button type="submit" class="btn btn-primary">All</button>
+                </form>
+            </div>
+
+
         </div>
     </div>
 
@@ -68,8 +78,8 @@
                     </div>
 
                     <#if isAdmin>
-                    <a href="/editGroup/${g.getId()}" class="card-link">Edit</a>
-                    <a href="/delGroup/${g.getId()}" class="card-link">Delete</a>
+                        <a href="/editGroup/${g.getId()}" class="card-link">Edit</a>
+                        <a href="/delGroup/${g.getId()}" class="card-link">Delete</a>
                     </#if>
 
 
