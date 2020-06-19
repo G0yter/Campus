@@ -13,6 +13,12 @@
         <div class="form-group mt-3">
             <form method="post" action="/updateGroup" enctype="multipart/form-data">
                 <input type="hidden" name="_csrf" value="${_csrf.token}"/>
+                <div class="form-group">
+                    <div class="custom-file">
+                        <input type="file" name="editGroupFile" id="editGroupFile">
+                        <label class="custom-file-label" for="editGroupFile">Choose file</label>
+                    </div>
+                </div>
 
                 <div class="form-group">
                     <input type="text" class="form-control" name="cipher" placeholder="Group cipher" value="${group.cipher}">
@@ -38,6 +44,6 @@
 
     <a href="/groups" class="card-link">Back</a>
 
-    <h5>You delete every Student by updating his group! Be careful</h5>
+    <h5 style="color: whitesmoke">You delete every Student by updating his group! Be careful</h5>
 
 </@c.page>

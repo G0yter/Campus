@@ -1,18 +1,24 @@
 <#import "../parts/common.ftl" as c>
 <#import "../parts/login.ftl" as l>
-
+<#include "../parts/security.ftl">
 
 
 
 <@c.page>
-    <@l.logout />
-    <a class="btn btn-primary" data-toggle="collapse" href="#messAdding" role="button" aria-expanded="false" aria-controls="collapseExample">
+    <a class="btn btn-primary mt-2" data-toggle="collapse" href="#messAdding" role="button" aria-expanded="false"
+       aria-controls="collapseExample">
         Add Group
     </a>
     <div class="collapse" id="messAdding">
         <div class="form-group mt-3">
             <form method="post" enctype="multipart/form-data">
                 <input type="hidden" name="_csrf" value="${_csrf.token}"/>
+                <div class="form-group">
+                    <div class="custom-file">
+                        <input type="file" name="groupFile" id="groupFile">
+                        <label class="custom-file-label" for="groupFile">Choose file</label>
+                    </div>
+                </div>
 
                 <div class="form-group">
                     <input type="text" class="form-control" name="cipher" placeholder="Group cipher">
@@ -43,21 +49,28 @@
 
 
 
-    <div class="card-columns" >
+    <div class="card-columns">
         <#list groups as g>
-            <div class="card my-3" style="width: 18rem;">
+            <div class="card text-center"
+                 style="background-color: rgba(0,0,0,0.5) !important; height: auto; width: 21rem;">
+                <#if g.filename??>
+                    <img src="/img/${g.filename}" class="card-img-top" alt="No image yet">
+                </#if>
                 <div class="card-body">
 
                     <div class="card-title">
-                        <h1 style="color:#0000ff">${g.cipher}</h1>
+                        <h1 style="color:#00ffff">${g.cipher}</h1>
                     </div>
 
                     <div class="m-2">
-                        <span><p style="color: #00ffff"> Faculty  </p> ${g.getFaculty().getName()}</span>
+                        <span><p style="color: #00ffff"> Faculty  </p> <p
+                                    style="color: whitesmoke">${g.getFaculty().getName()}</p></span>
                     </div>
 
+                    <#if isAdmin>
                     <a href="/editGroup/${g.getId()}" class="card-link">Edit</a>
-                    <a href="/delGroup/${g.getId()}"  class="card-link">Delete</a>
+                    <a href="/delGroup/${g.getId()}" class="card-link">Delete</a>
+                    </#if>
 
 
                 </div>
