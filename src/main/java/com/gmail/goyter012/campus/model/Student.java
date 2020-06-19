@@ -27,6 +27,8 @@ public class Student {
     @Column(name = "parents_addr")
     private String addressOfParents;
 
+    private String filename;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "faculty_id")
     private Faculty faculty;
