@@ -10,6 +10,14 @@
                 <input type="hidden" name="_csrf" value="${_csrf.token}"/>
 
                 <div class="form-group">
+                    <div class="custom-file">
+                        <input type="file" name="editStudentFile" id="editStudFile">
+                        <label class="custom-file-label" for="editStudFile">Choose file</label>
+                    </div>
+                </div>
+
+
+                <div class="form-group">
                     <input type="text" class="form-control" name="cNum" placeholder="Card number" value="${cardNum}" />
                 </div>
                 <div class="form-group">
