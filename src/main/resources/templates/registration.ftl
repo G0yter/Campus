@@ -2,6 +2,5 @@
 <#import "parts/login.ftl" as l>
 
 <@c.page>
-    Registration
-    <@l.login "/registration" "Sign up!" />
+    <@l.login "/registration" "Sign up!" "Registration" "${message!}" "You are already here?" "/login" "Sign in"/>
 </@c.page>
