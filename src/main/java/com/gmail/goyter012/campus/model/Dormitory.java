@@ -28,6 +28,8 @@ public class Dormitory implements Serializable {
     @Column(name = "dorm_number")
     private Integer dormNumber;
 
+    private String filename;
+
     @OneToMany(mappedBy = "dormitory", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Student> students = new ArrayList<>();
 
