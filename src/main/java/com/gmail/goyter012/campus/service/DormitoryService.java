@@ -31,10 +31,6 @@ public class DormitoryService {
 
     }
 
-    public List<Dormitory> getAllDormitories() {
-        return (List<Dormitory>) dormitoryRepo.findAll();
-    }
-
     public void delete(Dormitory dormitory) {
         dormitoryRepo.delete(dormitory);
 

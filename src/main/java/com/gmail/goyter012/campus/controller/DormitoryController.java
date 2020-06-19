@@ -49,7 +49,7 @@ public class DormitoryController {
 
     @GetMapping("/getAllDormitories")
     public String getAllDormitories(Model model){
-        model.addAttribute("dormitories", dormitoryService.getAllDormitories());
+        model.addAttribute("dormitories", dormitoryService.allDormitories());
         return "dormitory/dormitory";
     }
 

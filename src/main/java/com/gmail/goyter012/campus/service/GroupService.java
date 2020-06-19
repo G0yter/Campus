@@ -28,10 +28,6 @@ public class GroupService {
 
     }
 
-    public List<Group> getAllGroups() {
-        return (List<Group>) groupRepo.findAll();
-    }
-
     public void delete(Group group) {
         groupRepo.delete(group);
 

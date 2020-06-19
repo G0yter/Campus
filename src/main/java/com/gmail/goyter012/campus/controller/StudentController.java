@@ -96,7 +96,7 @@ public class StudentController {
 
     @GetMapping("/getAllStudents")
     public String getAllStudents(Model model){
-        model.addAttribute("students", studentService.getAllStudents());
+        model.addAttribute("students", studentService.allStudents());
         return "stud/main";
     }
 

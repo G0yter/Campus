@@ -77,7 +77,7 @@ public class FacultyController {
 
     @GetMapping("/getAllFaculties")
     public String getAllFaculties(Model model){
-        model.addAttribute("faculties", facultyService.getAllFaculties());
+        model.addAttribute("faculties", facultyService.allFaculties());
         return "faculty/faculty";
     }
 

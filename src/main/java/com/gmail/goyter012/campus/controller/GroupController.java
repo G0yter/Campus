@@ -51,7 +51,7 @@ public class GroupController {
 
     @GetMapping("/getAllGroups")
     public String getAllGroups(Model model) {
-        model.addAttribute("groups", groupService.getAllGroups());
+        model.addAttribute("groups", groupService.allGroups());
         return "group/group";
     }
 
