@@ -33,8 +33,7 @@ public class RegistrationController {
 
         User userFromDb = userService.findUserByUsername(user.getUsername());
         if (userFromDb != null) {
-
-            //TODO: show alert that user is already created
+            model.addAttribute("message", "Error! User already exists!");
             return "registration";
         }
 
