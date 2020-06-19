@@ -27,8 +27,21 @@ public class Student {
     @Column(name = "parents_addr")
     private String addressOfParents;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "faculty_id")
+    private Faculty faculty;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "group_id")
+    private Group groupOfStuds;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "dormitory_id")
+    private Dormitory dormitory;
+
     @Column(name = "room")
     private Integer room;
+
 
     public String getDate(Date date) {
         SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy");
