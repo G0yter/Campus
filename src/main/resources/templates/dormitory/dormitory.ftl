@@ -49,10 +49,17 @@
 
     <div class="form-row">
         <div class="form-group col-md-6">
-            <form method="get" action="filterDormitories" class="form-inline">
-                <input type="text" name="filterDormitories" class="form-control" placeholder="Search...">
-                <button type="submit" class="btn btn-primary ml-2">Search</button>
-            </form>
+            <div>
+                <form method="get" action="filterDormitories" class="form-inline">
+                    <input type="text" name="filterDormitories" class="form-control" placeholder="Search...">
+                    <button type="submit" class="btn btn-primary ml-2">Search</button>
+                </form>
+            </div>
+            <div>
+                <form method="get" action="getAllDormitories" class="form-inline">
+                    <button type="submit" class="btn btn-primary">All</button>
+                </form>
+            </div>
         </div>
     </div>
 
@@ -84,8 +91,8 @@
                     </div>
 
                     <#if isAdmin>
-                    <a href="/editDormitory/${d.getId()}" class="card-link">Edit</a>
-                    <a href="/delDormitory/${d.getId()}" class="card-link">Delete</a>
+                        <a href="/editDormitory/${d.getId()}" class="card-link">Edit</a>
+                        <a href="/delDormitory/${d.getId()}" class="card-link">Delete</a>
                     </#if>
 
                 </div>
