@@ -12,6 +12,13 @@
                 <input type="hidden" name="_csrf" value="${_csrf.token}"/>
 
                 <div class="form-group">
+                    <div class="custom-file">
+                        <input type="file" name="editDormitoryFile" id="editDormFile">
+                        <label class="custom-file-label" for="editDormFile">Choose file</label>
+                    </div>
+                </div>
+
+                <div class="form-group">
                     <input type="text" class="form-control" name="dNum" placeholder="Dorm number" value="${dormitory.dormNumber}" />
                 </div>
                 <div class="form-group">
@@ -41,6 +48,6 @@
 
     <a href="/dormitories" class="card-link">Back</a>
 
-    <h5>You delete every Student by updating his dormitory! Be careful</h5>
+    <h5 style="color: whitesmoke">You delete every Student by updating his dormitory! Be careful</h5>
 
 </@c.page>
