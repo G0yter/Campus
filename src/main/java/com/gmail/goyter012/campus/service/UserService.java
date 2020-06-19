@@ -8,18 +8,12 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-
 @Service
 public class UserService implements UserDetailsService {
 
 
-    private UserRepo userRepo;
-
     @Autowired
-    public void setUserRepo(UserRepo userRepo) {
-        this.userRepo = userRepo;
-    }
+    private UserRepo userRepo;
 
 
     public User findUserByUsername(String username) {
@@ -31,12 +25,9 @@ public class UserService implements UserDetailsService {
         return user;
     }
 
-    public List<User> findAllUsers() {
-        return userRepo.findAll();
-    }
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        return (UserDetails) userRepo.findByUsername(username);
+        return userRepo.findByUsername(username);
     }
 }
