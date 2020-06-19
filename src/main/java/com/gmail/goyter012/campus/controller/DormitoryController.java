@@ -47,6 +47,12 @@ public class DormitoryController {
         return "dormitory/dormitory";
     }
 
+    @GetMapping("/getAllDormitories")
+    public String getAllDormitories(Model model){
+        model.addAttribute("dormitories", dormitoryService.getAllDormitories());
+        return "dormitory/dormitory";
+    }
+
 
     @GetMapping("/editDormitory/{id}")
     public String dormEditForm(@PathVariable Long id, Model model) {
