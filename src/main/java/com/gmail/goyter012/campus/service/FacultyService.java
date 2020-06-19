@@ -35,6 +35,10 @@ public class FacultyService {
 
     }
 
+    public List<Faculty> getAllFaculties() {
+        return (List<Faculty>) facultyRepo.findAll();
+    }
+
 
     public Faculty saveFaculty(Faculty faculty) {
         facultyRepo.save(faculty);

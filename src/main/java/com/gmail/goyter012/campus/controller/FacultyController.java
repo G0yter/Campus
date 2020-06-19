@@ -75,6 +75,12 @@ public class FacultyController {
         return saveOrEdit(file, null, fNum, phone, dName, model, "save");
     }
 
+    @GetMapping("/getAllFaculties")
+    public String getAllFaculties(Model model){
+        model.addAttribute("faculties", facultyService.getAllFaculties());
+        return "faculty/faculty";
+    }
+
 
     @GetMapping("/editFaculty/{id}")
     public String facEditForm(@PathVariable Long id, Model model) {
