@@ -7,19 +7,27 @@ import com.gmail.goyter012.campus.service.GroupService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
+import java.util.UUID;
 
 @Controller
 @Slf4j
 @RequiredArgsConstructor
 public class GroupController {
+
+    @Value("${upload.path}")
+    private String uploadPath;
 
     private GroupService groupService;
 
@@ -61,8 +69,9 @@ public class GroupController {
 
     @PostMapping("/groups")
     public String addGroup(@RequestParam String cipher,
-                           @RequestParam String facName, Model model) {
-        return saveOrEdit(null, cipher, facName, model, "save");
+                           @RequestParam String facName, Model model,
+                           @RequestParam("groupFile") MultipartFile file) throws IOException {
+        return saveOrEdit(file,null, cipher, facName, model, "save");
     }
 
 
@@ -76,8 +85,9 @@ public class GroupController {
     @PostMapping("/updateGroup")
     public String editGroup(@RequestParam Long id,
                             @RequestParam String cipher,
-                            @RequestParam String facName, Model model) {
-        return saveOrEdit(id, cipher, facName, model, "edit");
+                            @RequestParam String facName, Model model,
+                            @RequestParam("editGroupFile") MultipartFile file) throws IOException {
+        return saveOrEdit(file, id, cipher, facName, model, "edit");
     }
 
 
@@ -88,10 +98,11 @@ public class GroupController {
     }
 
 
-    private String saveOrEdit(@RequestParam Long id,
+    private String saveOrEdit(MultipartFile file,
+                              @RequestParam Long id,
                               @RequestParam String cipher,
                               @RequestParam String facName,
-                              Model model, String choice) {
+                              Model model, String choice) throws IOException {
 
         Group group = new Group();
 
@@ -112,6 +123,24 @@ public class GroupController {
         if (group.getFaculty() == null) {
             return "errors/facultyNotInList";
         }
+
+        if(file != null && !file.getOriginalFilename().isEmpty()){
+
+            File uploadDir = new File(uploadPath);
+
+            if(!uploadDir.exists()){
+                uploadDir.mkdirs();
+            }
+
+            String uuidFile = UUID.randomUUID().toString();
+            String resultFilename = uuidFile + "." + file.getOriginalFilename();
+
+            file.transferTo(new File(uploadPath + "/" + resultFilename));
+
+            group.setFilename(resultFilename);
+
+        }
+
 
         groupService.saveGroup(group);
         List<Group> groups = groupService.allGroups();
