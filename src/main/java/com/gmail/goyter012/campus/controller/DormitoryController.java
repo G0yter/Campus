@@ -5,19 +5,27 @@ import com.gmail.goyter012.campus.service.DormitoryService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
+import java.util.UUID;
 
 @Controller
 @Slf4j
 @RequiredArgsConstructor
 public class DormitoryController {
+
+    @Value("${upload.path}")
+    private String uploadPath;
 
     private DormitoryService dormitoryService;
 
@@ -53,8 +61,9 @@ public class DormitoryController {
                                 @RequestParam String dNum,
                                 @RequestParam String dAddr,
                                 @RequestParam String phone,
-                                @RequestParam String conName, Model model) {
-        return saveOrEdit(id, dNum, dAddr, phone, conName, model, "edit");
+                                @RequestParam String conName, Model model,
+                                @RequestParam("editDormitoryFile") MultipartFile file) throws IOException {
+        return saveOrEdit(file, id, dNum, dAddr, phone, conName, model, "edit");
     }
 
 
@@ -62,8 +71,9 @@ public class DormitoryController {
     public String addDormitory(@RequestParam String dNum,
                                @RequestParam String dAddr,
                                @RequestParam String phone,
-                               @RequestParam String conName, Model model) {
-        return saveOrEdit(null, dNum, dAddr, phone, conName, model, "save");
+                               @RequestParam String conName, Model model,
+                               @RequestParam("dormitoryFile") MultipartFile file) throws IOException {
+        return saveOrEdit(file, null, dNum, dAddr, phone, conName, model, "save");
     }
 
 
@@ -83,11 +93,12 @@ public class DormitoryController {
     }
 
 
-    private String saveOrEdit(@RequestParam Long id,
+    private String saveOrEdit(MultipartFile file,
+                              @RequestParam Long id,
                               @RequestParam String dNum,
                               @RequestParam String dAddr,
                               @RequestParam String phone,
-                              @RequestParam String conName, Model model, String choice) {
+                              @RequestParam String conName, Model model, String choice) throws IOException {
 
         Dormitory dormitory = new Dormitory();
 
@@ -105,6 +116,25 @@ public class DormitoryController {
         } catch (NumberFormatException e) {
             return "errors/errorInput";
         }
+
+
+        if(file != null && !file.getOriginalFilename().isEmpty()){
+
+            File uploadDir = new File(uploadPath);
+
+            if(!uploadDir.exists()){
+                uploadDir.mkdirs();
+            }
+
+            String uuidFile = UUID.randomUUID().toString();
+            String resultFilename = uuidFile + "." + file.getOriginalFilename();
+
+            file.transferTo(new File(uploadPath + "/" + resultFilename));
+
+            dormitory.setFilename(resultFilename);
+
+        }
+
 
 
         dormitoryService.saveDormitory(dormitory);
