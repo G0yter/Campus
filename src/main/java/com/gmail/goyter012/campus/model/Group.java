@@ -22,6 +22,8 @@ public class Group {
     @JoinColumn(name = "faculty_id")
     private Faculty faculty;
 
+    private String filename;
+
     @OneToMany(mappedBy = "groupOfStuds", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Student> students = new ArrayList<>();
 
