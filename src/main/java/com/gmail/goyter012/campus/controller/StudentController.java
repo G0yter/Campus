@@ -11,22 +11,31 @@ import com.gmail.goyter012.campus.service.StudentService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
+import javax.swing.plaf.multi.MultiInternalFrameUI;
+import java.io.File;
+import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.UUID;
 
 @Controller
 @RequiredArgsConstructor
 @Slf4j
 public class StudentController {
+
+    @Value("${upload.path}")
+    private String uploadPath;
 
     private StudentService studentService;
 
@@ -58,7 +67,7 @@ public class StudentController {
 
     @GetMapping("/")
     public String start() {
-        return "index";
+        return "redirect:/main";
     }
 
 
@@ -77,9 +86,18 @@ public class StudentController {
                               @RequestParam String facName,
                               @RequestParam String grCipher,
                               @RequestParam String dormNum,
-                              @RequestParam String room, Model model) {
+                              @RequestParam String room, Model model,
+                              @RequestParam("studentFile") MultipartFile file
+                            ) throws IOException {
 
-        return saveOrEdit(null, cNum, fName, doB, pAddrs, facName, grCipher, dormNum, room, model, "save");
+        return saveOrEdit(null, cNum, fName, doB, pAddrs, facName, grCipher, dormNum, room, file, model, "save");
+    }
+
+
+    @GetMapping("/getAllStudents")
+    public String getAllStudents(Model model){
+        model.addAttribute("students", studentService.getAllStudents());
+        return "stud/main";
     }
 
     @GetMapping("/filterStudents")
@@ -116,9 +134,10 @@ public class StudentController {
                            @RequestParam String grCipher,
                            @RequestParam String dormNum,
                            @RequestParam String room,
-                           Model model) {
+                           @RequestParam("editStudentFile") MultipartFile file,
+                           Model model) throws IOException {
 
-        return saveOrEdit(id, cNum, fName, doB, pAddrs, facName, grCipher, dormNum, room, model, "edit");
+        return saveOrEdit(id, cNum, fName, doB, pAddrs, facName, grCipher, dormNum, room, file, model, "edit");
     }
 
 
@@ -147,7 +166,8 @@ public class StudentController {
                               @RequestParam String grCipher,
                               @RequestParam String dormNum,
                               @RequestParam String room,
-                              Model model, String choice) {
+                              MultipartFile file,
+                              Model model, String choice) throws IOException {
 
         Date date;
         SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy");
@@ -221,6 +241,25 @@ public class StudentController {
         if (student.getDormitory() == null) {
             return "errors/dormitoryNotInlist";
         }
+
+
+        if(file != null && !file.getOriginalFilename().isEmpty()){
+
+            File uploadDir = new File(uploadPath);
+
+            if(!uploadDir.exists()){
+                uploadDir.mkdirs();
+            }
+
+            String uuidFile = UUID.randomUUID().toString();
+            String resultFilename = uuidFile + "." + file.getOriginalFilename();
+
+            file.transferTo(new File(uploadPath + "/" + resultFilename));
+
+            student.setFilename(resultFilename);
+
+        }
+
 
 
         studentService.saveStudent(student);
