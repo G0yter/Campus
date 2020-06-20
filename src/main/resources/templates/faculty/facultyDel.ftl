@@ -1,14 +1,31 @@
 <#import "../parts/common.ftl" as c>
 <@c.page>
-    <h1 style="color: chartreuse">Delete Faculty.</h1>
-    <form method="post" action="/deleteFaculty">
-        <input type="hidden" name="_csrf" value="${_csrf.token}"/>
-        <input type="hidden" value="${faculty.getId()}" name="id">
-        <div class="form-group">
-            <button type="submit" class="btn btn-primary">Delete Faculty  ${faculty.getName()}</button>
-        </div>
-    </form>
-    <a href="/faculties" class="card-link">Back</a>
 
-    <h5>You delete every Student and Group by deleting his faculty! Be careful</h5>
+
+    <div class="card text-center"
+         style="background-color: rgba(0,0,0,0.5) !important; height: auto; width: 67rem;">
+        <div class="card-body">
+            <div class="card-title">
+                <h1 style="color:#acffee">Are you sure that you want to delete the faculty ${faculty.getName()} ?</h1>
+            </div>
+
+            <span style="float: left;">
+                <form method="get" action="/faculties">
+                    <input type="hidden" name="_csrf" value="${_csrf.token}"/>
+                    <input type="hidden" value="${faculty.getId()}" name="id">
+                    <button type="submit" class="btn btn-primary">Cancel</button>
+                </form>
+            </span>
+
+            <span style="float: right;">
+                <form method="post" action="/deleteFaculty">
+                    <input type="hidden" name="_csrf" value="${_csrf.token}"/>
+                    <input type="hidden" value="${faculty.getId()}" name="id">
+                    <button type="submit" class="btn btn-primary" style="background-color: red">Delete</button>
+                </form>
+            </span>
+
+        </div>
+    </div>
+
 </@c.page>
