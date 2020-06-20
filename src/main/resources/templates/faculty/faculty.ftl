@@ -45,7 +45,7 @@
 
     <div class="form-row">
         <div class="form-group col-md-6">
-            <div>it s
+            <div>
                 <form method="get" action="filterFaculties" class="form-inline">
                     <input type="text" name="filterFaculties" class="form-control" placeholder="Search...">
                     <button type="submit" class="btn btn-primary ml-2">Search</button>
