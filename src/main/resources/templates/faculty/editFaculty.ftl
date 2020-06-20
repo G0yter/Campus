@@ -46,6 +46,4 @@
 
     <a href="/faculties" class="card-link">Back</a>
 
-    <h5 style="color: whitesmoke">You delete every Student and Group by updating his faculty! Be careful</h5>
-
 </@c.page>

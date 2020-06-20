@@ -48,6 +48,4 @@
 
     <a href="/dormitories" class="card-link">Back</a>
 
-    <h5 style="color: whitesmoke">You delete every Student by updating his dormitory! Be careful</h5>
-
 </@c.page>

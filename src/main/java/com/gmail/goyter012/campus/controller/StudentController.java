@@ -88,14 +88,14 @@ public class StudentController {
                               @RequestParam String dormNum,
                               @RequestParam String room, Model model,
                               @RequestParam("studentFile") MultipartFile file
-                            ) throws IOException {
+    ) throws IOException {
 
         return saveOrEdit(null, cNum, fName, doB, pAddrs, facName, grCipher, dormNum, room, file, model, "save");
     }
 
 
     @GetMapping("/getAllStudents")
-    public String getAllStudents(Model model){
+    public String getAllStudents(Model model) {
         model.addAttribute("students", studentService.allStudents());
         return "stud/main";
     }
@@ -172,7 +172,7 @@ public class StudentController {
         Date date;
         SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy");
 
-        Student student = new Student();
+        Student student = studentService.getById(id) != null ? studentService.getById(id) : new Student();
 
 
         if (fName.equals("") || pAddrs.equals("")) {
@@ -243,11 +243,11 @@ public class StudentController {
         }
 
 
-        if(file != null && !file.getOriginalFilename().isEmpty()){
+        if (file != null && !file.getOriginalFilename().isEmpty()) {
 
             File uploadDir = new File(uploadPath);
 
-            if(!uploadDir.exists()){
+            if (!uploadDir.exists()) {
                 uploadDir.mkdirs();
             }
 
@@ -261,21 +261,12 @@ public class StudentController {
         }
 
 
-
         studentService.saveStudent(student);
         List<Student> students = studentService.allStudents();
         model.addAttribute("students", students);
 
-        if (choice.equals("save")) {
-            return "stud/main";
-
-        }
-        if (choice.equals("edit")) {
-            Student st = studentService.getById(id);
-            studentService.delete(st);
-
-            return "redirect:/main";
-        }
+        if (choice.equals("save")) return "stud/main";
+        else if (choice.equals("edit")) return "redirect:/main";
 
         return "/";
 

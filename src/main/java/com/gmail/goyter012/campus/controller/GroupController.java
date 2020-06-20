@@ -110,7 +110,7 @@ public class GroupController {
                               @RequestParam String facName,
                               Model model, String choice) throws IOException {
 
-        Group group = new Group();
+        Group group = groupService.getGroupById(id) != null ? groupService.getGroupById(id) : new Group();
 
         group.setCipher(cipher);
 
@@ -153,15 +153,8 @@ public class GroupController {
         model.addAttribute("groups", groups);
 
 
-        if (choice.equals("save")) {
-            return "group/group";
-        }
-        if (choice.equals("edit")) {
-            Group gr = groupService.getGroupById(id);
-            groupService.delete(gr);
-
-            return "redirect:/groups";
-        }
+        if (choice.equals("save")) return "group/group";
+        if (choice.equals("edit")) return "redirect:/groups";
 
         return "/";
 

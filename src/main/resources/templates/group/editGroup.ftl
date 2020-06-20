@@ -44,6 +44,4 @@
 
     <a href="/groups" class="card-link">Back</a>
 
-    <h5 style="color: whitesmoke">You delete every Student by updating his group! Be careful</h5>
-
 </@c.page>

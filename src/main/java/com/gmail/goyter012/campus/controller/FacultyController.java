@@ -106,7 +106,7 @@ public class FacultyController {
                               @RequestParam String phone,
                               @RequestParam String dName, Model model, String choice) throws IOException {
 
-        Faculty faculty = new Faculty();
+        Faculty faculty = facultyService.getFacultyById(id) != null ? facultyService.getFacultyById(id) : new Faculty();
 
         faculty.setDecanName(dName);
         faculty.setName(fNum);
@@ -140,15 +140,8 @@ public class FacultyController {
         model.addAttribute("faculties", faculties);
 
 
-        if (choice.equals("save")) {
-            return "faculty/faculty";
-        }
-        if (choice.equals("edit")) {
-            Faculty fc = facultyService.getFacultyById(id);
-            facultyService.delete(fc);
-
-            return "redirect:/faculties";
-        }
+        if (choice.equals("save")) return "faculty/faculty";
+        if (choice.equals("edit")) return "redirect:/faculties";
         return "/";
 
 

@@ -106,7 +106,7 @@ public class DormitoryController {
                               @RequestParam String phone,
                               @RequestParam String conName, Model model, String choice) throws IOException {
 
-        Dormitory dormitory = new Dormitory();
+        Dormitory dormitory = dormitoryService.getDormById(id) != null ? dormitoryService.getDormById(id) : new Dormitory();
 
         dormitory.setAddress(dAddr);
         dormitory.setCommFullName(conName);
@@ -147,14 +147,9 @@ public class DormitoryController {
         List<Dormitory> dormitories = dormitoryService.allDormitories();
         model.addAttribute("dormitories", dormitories);
 
-        if (choice.equals("save")) {
-            return "dormitory/dormitory";
-        } else if (choice.equals("edit")) {
-            Dormitory dr = dormitoryService.getDormById(id);
-            dormitoryService.delete(dr);
+        if (choice.equals("save")) return "dormitory/dormitory";
+        else if (choice.equals("edit")) return "redirect:/dormitories";
 
-            return "redirect:/dormitories";
-        }
         return "/";
 
     }

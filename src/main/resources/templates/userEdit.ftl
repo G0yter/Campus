@@ -5,7 +5,7 @@
          style="background-color: rgba(210,210,210,0.5) !important; height: 325px; width: 21rem;">
         <div class="card-body">
             <div class="card-title">
-                <h1 style="color:#00ffff">User Editor</h1>
+                <h1 style="color:rgba(53,72,60,0.87)">User Editor</h1>
             </div>
 
             <form action="/user" method="post">
