@@ -27,9 +27,6 @@
                     <input type="text" class="form-control" name="facName" placeholder="Faculty Name">
                 </div>
 
-                <a>
-                    *Enter all forms
-                </a>
                 <div class="form-group">
                     <button type="submit" class="btn btn-primary">Add</button>
                 </div>
@@ -49,7 +46,7 @@
 
             <div>
                 <form method="get" action="/getAllGroups" class="form-inline">
-                    <button type="submit" class="btn btn-primary">All</button>
+                    <button type="submit" class="btn btn-primary mt-1">All</button>
                 </form>
             </div>
 
