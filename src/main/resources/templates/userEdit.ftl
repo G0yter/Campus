@@ -1,20 +1,33 @@
 <#import "parts/common.ftl" as c>
 
 <@c.page>
-    User editor
-
-    <form action="/user" method="post">
-
-        <input type="text" name="username" value="${user.username}">
-        <#list roles as role>
-            <div>
-                <label><input type="checkbox" name="${role}" ${user.roles?seq_contains(role)?string("checked", "")}>${role}</label>
+    <div class="card text-center mt-5"
+         style="background-color: rgba(210,210,210,0.5) !important; height: 325px; width: 21rem;">
+        <div class="card-body">
+            <div class="card-title">
+                <h1 style="color:#00ffff">User Editor</h1>
             </div>
-        </#list>
-        <input type="hidden" value="${user.id}" name="userId"/>
-        <input type="hidden" value="${_csrf.token}" name="_csrf"/>
-        <button type="submit">Save</button>
-    </form>
 
+            <form action="/user" method="post">
+                <div class="form-group">
+                    <input type="text" name="username" value="${user.username}">
+                </div>
 
+                <div class="form-group">
+                    <#list roles as role>
+                        <div>
+                            <label><input type="checkbox" class="form-check-input"
+                                          name="${role}" ${user.roles?seq_contains(role)?string("checked", "")}>${role}
+                            </label>
+                        </div>
+                    </#list>
+                </div>
+
+                <input type="hidden" value="${user.id}" name="userId"/>
+                <input type="hidden" value="${_csrf.token}" name="_csrf"/>
+                <button type="submit" class="btn btn-primary">Save</button>
+            </form>
+        </div>
+    </div>
 </@c.page>
+
