@@ -106,7 +106,11 @@ public class DormitoryController {
                               @RequestParam String phone,
                               @RequestParam String conName, Model model, String choice) throws IOException {
 
-        Dormitory dormitory = dormitoryService.getDormById(id) != null ? dormitoryService.getDormById(id) : new Dormitory();
+
+        Dormitory dormitory;
+        if(id != null) {
+            dormitory = dormitoryService.getDormById(id) != null ? dormitoryService.getDormById(id) : new Dormitory();
+        } else dormitory = new Dormitory();
 
         dormitory.setAddress(dAddr);
         dormitory.setCommFullName(conName);

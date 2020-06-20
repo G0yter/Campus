@@ -172,7 +172,10 @@ public class StudentController {
         Date date;
         SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy");
 
-        Student student = studentService.getById(id) != null ? studentService.getById(id) : new Student();
+        Student student;
+        if(id != null){
+            student = studentService.getById(id) != null ? studentService.getById(id) : new Student();
+        } else student = new Student();
 
 
         if (fName.equals("") || pAddrs.equals("")) {

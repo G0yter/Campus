@@ -110,7 +110,11 @@ public class GroupController {
                               @RequestParam String facName,
                               Model model, String choice) throws IOException {
 
-        Group group = groupService.getGroupById(id) != null ? groupService.getGroupById(id) : new Group();
+
+        Group group;
+        if (id != null) {
+            group = groupService.getGroupById(id) != null ? groupService.getGroupById(id) : new Group();
+        } else group = new Group();
 
         group.setCipher(cipher);
 

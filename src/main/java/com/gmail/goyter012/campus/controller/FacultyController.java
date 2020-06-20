@@ -76,7 +76,7 @@ public class FacultyController {
     }
 
     @GetMapping("/getAllFaculties")
-    public String getAllFaculties(Model model){
+    public String getAllFaculties(Model model) {
         model.addAttribute("faculties", facultyService.allFaculties());
         return "faculty/faculty";
     }
@@ -106,7 +106,11 @@ public class FacultyController {
                               @RequestParam String phone,
                               @RequestParam String dName, Model model, String choice) throws IOException {
 
-        Faculty faculty = facultyService.getFacultyById(id) != null ? facultyService.getFacultyById(id) : new Faculty();
+
+        Faculty faculty;
+        if (id != null) {
+            faculty = facultyService.getFacultyById(id) != null ? facultyService.getFacultyById(id) : new Faculty();
+        } else faculty = new Faculty();
 
         faculty.setDecanName(dName);
         faculty.setName(fNum);
@@ -116,11 +120,11 @@ public class FacultyController {
             return "errors/errorInput";
         }
 
-        if(file != null && !file.getOriginalFilename().isEmpty()){
+        if (file != null && !file.getOriginalFilename().isEmpty()) {
 
             File uploadDir = new File(uploadPath);
 
-            if(!uploadDir.exists()){
+            if (!uploadDir.exists()) {
                 uploadDir.mkdirs();
             }
 
@@ -132,7 +136,6 @@ public class FacultyController {
             faculty.setFilename(resultFilename);
 
         }
-
 
 
         facultyService.saveFaculty(faculty);
