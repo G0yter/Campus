@@ -29,7 +29,7 @@
                 </div>
                 <div class="form-group">
                     <input type="text" class="form-control" name="doB"
-                           placeholder="Date of Birth(FORMAT - DD.MM.YYYY ONLY!!!)">
+                           placeholder="DD.MM.YYYY">
                 </div>
                 <div class="form-group">
                     <input type="text" class="form-control" name="pAddrs" placeholder="Parent's Address">
@@ -46,10 +46,6 @@
                 <div class="form-group">
                     <input type="text" class="form-control" name="room" placeholder="Room number">
                 </div>
-
-                <a>
-                    *Enter all forms
-                </a>
                 <div class="form-group">
                     <button type="submit" class="btn btn-primary">Add</button>
                 </div>
@@ -69,7 +65,7 @@
             </div>
             <div>
                 <form method="get" action="getAllStudents" class="form-inline">
-                    <button type="submit" class="btn btn-primary">All</button>
+                    <button type="submit" class="btn btn-primary mt-1">All</button>
                 </form>
             </div>
         </div>
