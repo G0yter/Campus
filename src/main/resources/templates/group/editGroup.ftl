@@ -8,9 +8,6 @@
             <div class="card-title">
                 <h1 style="color:#acffee">Edit Group number ${group.getCipher()}</h1>
             </div>
-            <div class="form-group mt-3">
-                <form method="post" action="/update" enctype="multipart/form-data">
-                    <input type="hidden" name="_csrf" value="${_csrf.token}"/>
                     <div class="form-group mt-3">
                         <form method="post" action="/updateGroup" enctype="multipart/form-data">
                             <input type="hidden" name="_csrf" value="${_csrf.token}"/>
