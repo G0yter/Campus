@@ -5,7 +5,7 @@
 html,body{
     background-image: url('https://i.pinimg.com/originals/5c/c4/14/5cc414c11fabfa496391a17a41ca09da.jpg');
     background-size: cover;
-    background-repeat: no-repeat;
+    background-repeat: repeat;
     height: 100%;
     font-family: 'Numans', sans-serif;
 }
