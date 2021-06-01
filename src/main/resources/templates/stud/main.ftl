@@ -10,12 +10,12 @@
         Add Student card
     </a>
     <div class="collapse" id="messAdding">
-        <div class="form-group mt-3">
+        <div class="form-group mt-3 col-md-5">
             <form method="post" enctype="multipart/form-data">
                 <input type="hidden" name="_csrf" value="${_csrf.token}"/>
 
                 <div class="form-group">
-                    <div class="custom-file">
+                    <div class="custom-file" >
                         <input type="file" name="studentFile" id="studFile">
                         <label class="custom-file-label" for="studFile">Choose file</label>
                     </div>
@@ -56,7 +56,7 @@
     </div>
 
     <div class="form-row">
-        <div class="form-group col-md-6">
+        <div class="form-group mt-2 col-md-6">
             <div>
                 <form method="get" action="filterStudents" class="form-inline">
                     <input type="text" name="filterStudents" class="form-control" placeholder="Search..."/>
@@ -83,46 +83,46 @@
                 <div class="card-body">
 
                     <div class="card-title">
-                        <h1 style="color:#0000ff">Card №${s.cardNumber}</h1>
+                        <h1 style="color:#007bff; font-weight: bold">Card №${s.cardNumber}</h1>
                     </div>
 
                     <div class="card-subtitle mb-2 text-muted">
-                        <h2 style="color:#00ffff">${s.fullName}</h2>
+                        <h2 style="color:#007bff; font-weight: bolder">${s.fullName}</h2>
                     </div>
 
                     <div class="m-2">
-                        <span><p style="color: #00ffff">Date of Birth: </p><p
+                        <span><p style="color: #007bff">Date of Birth: </p><p
                                     style="color: whitesmoke">${s.getDate(s.dateOfBirth)}</p> </span>
                     </div>
 
                     <div class="m-2">
-                        <span><p style="color: #00ffff">Parent's address:</p><p
+                        <span><p style="color: #007bff">Parent's address:</p><p
                                     style="color: whitesmoke">${s.addressOfParents}</p></span>
                     </div>
 
                     <div class="m-2">
-                        <span><p style="color: #00ffff">Faculty name:</p> <p
+                        <span><p style="color: #007bff">Faculty name:</p> <p
                                     style="color: whitesmoke">${s.faculty.name}</p></span>
                     </div>
 
                     <div class="m-2">
-                        <span><p style="color: #00ffff">Group name:</p> <p
+                        <span><p style="color: #007bff">Group name:</p> <p
                                     style="color: whitesmoke">${s.groupOfStuds.cipher}</p></span>
                     </div>
 
                     <div class="m-2">
-                        <span><p style="color: #00ffff">Dormitory number:</p> <p
+                        <span><p style="color: #007bff">Dormitory number:</p> <p
                                     style="color: whitesmoke">${s.dormitory.dormNumber}</p></span>
                     </div>
 
                     <div class="m-2">
-                        <span><p style="color: #00ffff">Room number:</p> <p
+                        <span><p style="color: #007bff">Room number:</p> <p
                                     style="color: whitesmoke">${s.room}</p></span>
                     </div>
 
                     <#if isAdmin>
-                        <a href="/edit/${s.getId()}" class="card-link">Edit</a>
-                        <a href="/del/${s.getId()}" class="card-link">Delete</a>
+                        <a href="/edit/${s.getId()}" class="card-link" style="font-style: italic">Edit</a>
+                        <a href="/del/${s.getId()}" class="card-link" style="font-style: italic">Delete</a>
                     </#if>
                 </div>
             </div>

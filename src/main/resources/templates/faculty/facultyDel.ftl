@@ -6,7 +6,7 @@
          style="background-color: rgba(0,0,0,0.5) !important; height: auto; width: 67rem;">
         <div class="card-body">
             <div class="card-title">
-                <h1 style="color:#acffee">Are you sure that you want to delete the faculty ${faculty.getName()} ?</h1>
+                <h1 style="color:#007bff">Are you sure that you want to delete the faculty ${faculty.getName()} ?</h1>
             </div>
 
             <span style="float: left;">

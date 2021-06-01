@@ -10,7 +10,7 @@
         Add Group
     </a>
     <div class="collapse" id="messAdding">
-        <div class="form-group mt-3">
+        <div class="form-group mt-3 col-md-5">
             <form method="post" enctype="multipart/form-data">
                 <input type="hidden" name="_csrf" value="${_csrf.token}"/>
                 <div class="form-group">
@@ -36,7 +36,7 @@
     </div>
 
     <div class="form-row">
-        <div class="form-group col-md-6">
+        <div class="form-group mt-2 col-md-6">
             <div>
                 <form method="get" action="filterGroups" class="form-inline">
                     <input type="text" name="filterGroups" class="form-control" placeholder="Search...">
@@ -66,17 +66,17 @@
                 <div class="card-body">
 
                     <div class="card-title">
-                        <h1 style="color:#00ffff">${g.cipher}</h1>
+                        <h1 style="color:#007bff; font-weight: bold">${g.cipher}</h1>
                     </div>
 
                     <div class="m-2">
-                        <span><p style="color: #00ffff"> Faculty  </p> <p
+                        <span><p style="color: #007bff"> Faculty  </p> <p
                                     style="color: whitesmoke">${g.getFaculty().getName()}</p></span>
                     </div>
 
                     <#if isAdmin>
-                        <a href="/editGroup/${g.getId()}" class="card-link">Edit</a>
-                        <a href="/delGroup/${g.getId()}" class="card-link">Delete</a>
+                        <a href="/editGroup/${g.getId()}" class="card-link" style="font-style: italic">Edit</a>
+                        <a href="/delGroup/${g.getId()}" class="card-link" style="font-style: italic">Delete</a>
                     </#if>
 
 

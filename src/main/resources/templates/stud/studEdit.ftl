@@ -5,9 +5,9 @@
          style="background-color: rgba(0,0,0,0.5) !important; height: auto; width: 67rem;">
         <div class="card-body">
             <div class="card-title">
-                <h1 style="color:#acffee">Edit Student card № ${student.cardNumber}</h1>
+                <h1 style="color:#007bff">Edit Student card № ${student.cardNumber}</h1>
             </div>
-            <div class="form-group mt-3">
+            <div class="form-group mt-3 mx-auto" style="width: 400px;">
                 <form method="post" action="/update" enctype="multipart/form-data">
                     <input type="hidden" name="_csrf" value="${_csrf.token}"/>
 
