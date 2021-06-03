@@ -74,6 +74,7 @@
                                     style="color: whitesmoke">${g.getFaculty().getName()}</p></span>
                     </div>
 
+                    <a href="/lessons/${g.getId()}" class="card-link" style="font-weight: bold">Schedule</a>
                     <#if isAdmin>
                         <a href="/editGroup/${g.getId()}" class="card-link" style="font-style: italic">Edit</a>
                         <a href="/delGroup/${g.getId()}" class="card-link" style="font-style: italic">Delete</a>

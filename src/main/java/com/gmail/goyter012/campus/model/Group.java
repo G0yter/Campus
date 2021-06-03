@@ -5,6 +5,7 @@ import lombok.Data;
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "stud_gr")
@@ -26,6 +27,9 @@ public class Group {
 
     @OneToMany(mappedBy = "groupOfStuds", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Student> students = new ArrayList<>();
+
+    @OneToMany(mappedBy = "lessonGroup", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Lesson> lessons;
 
 
 }
